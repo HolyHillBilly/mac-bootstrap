@@ -24,7 +24,6 @@ bootstrap_echo() {
 osname=$(uname)
 COMMANDLINE_TOOLS="/Library/Developer/CommandLineTools"
 OLD_DOTFILES_BACKUP=$HOME/old_dotfiles_backup
-DICTIONARY_DIR=$HOME/Library/Spelling
 
 DOTFILES_REPO_URL="https://github.com/holyhillbilly/dotfiles.git"
 DOTFILES_BRANCH="master"
@@ -99,10 +98,10 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 4. Setup dotfiles (http://jsua.co/dotfiles)
+# 3. Setup dotfiles (https://github.com/holyhillbilly/dotfiles)
 ################################################################################
 
-bootstrap_echo "Step 4: Installing dotfiles..."
+bootstrap_echo "Step 3: Installing dotfiles..."
 
 if [[ -d $DOTFILES_DIR ]]; then
   bootstrap_echo "Backing up old dotfiles to $HOME/old_dotfiles_backup..."
@@ -120,10 +119,10 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 5. Install ~/bin utilities
+# 4. Install ~/bin utilities
 ################################################################################
 
-bootstrap_echo "Step 5: Installing ~/bin utilities..."
+bootstrap_echo "Step 4: Installing ~/bin utilities..."
 
 cp -R $BOOTSTRAP_DIR/bin/* $HOME/bin/
 
@@ -131,10 +130,10 @@ bootstrap_echo "Done!"
 
 
 ################################################################################
-# 8. Install Powerline-patched fonts
+# 5. Install Powerline-patched fonts
 ################################################################################
 
-bootstrap_echo "Step 8: Installing fixed-width fonts patched for use with Powerline symbols..."
+bootstrap_echo "Step 5: Installing fixed-width fonts patched for use with Powerline symbols..."
 if [ -d "$HOME/src/fonts" ]; then
   rm -rf $HOME/src/fonts
 fi
@@ -143,22 +142,6 @@ cd $HOME/src/fonts
 ./install.sh
 cd $HOME
 rm -rf $HOME/src/fonts
-
-bootstrap_echo "Done!"
-
-
-################################################################################
-# 9. Install Vundle & Vim plugins (https://github.com/VundleVim/Vundle.vim.git)
-################################################################################
-
-bootstrap_echo "Step 9: Installing Vundle and vim plugins..."
-if [ -d $HOME/.vim/bundle ]; then
-  rm -rf $HOME/.vim/bundle
-fi
-git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-cp -R $DOTFILES_DIR/vim/colors $HOME/.vim # So Vim won't complain about solarized not being found.
-vim +PluginInstall +qall
-rm -rf $HOME/.vim/colors
 
 bootstrap_echo "Done!"
 
